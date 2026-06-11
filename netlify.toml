@@ -1,0 +1,43 @@
+# Netlify configuration for I And I Empire Appliance
+
+[build]
+  publish = "."   # root folder — all your HTML files are here
+
+# Security headers applied to every page
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Cache static assets aggressively
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirect www to non-www (or flip if you prefer www)
+[[redirects]]
+  from = "https://www.iandiempireappliance.com/*"
+  to   = "https://iandiempireappliance.com/:splat"
+  status = 301
+  force  = true
+
+# Custom 404 page
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

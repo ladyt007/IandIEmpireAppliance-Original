@@ -1,0 +1,11 @@
+# Redirect www to root domain
+https://www.iandiempireappliance.com/* https://iandiempireappliance.com/:splat 301!
+
+# Friendly short URLs
+/book           /book.html              200
+/services       /services.html          200
+/plans          /plans.html             200
+/about          /about.html             200
+/careers        /careers.html           200
+/how-it-works   /how-it-works.html      200
+/service-area   /service-area.html      200
