@@ -3,317 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Request Service | I And I Empire</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<title>How It Works | I And I Empire</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black:#111111; --green:#00C829; --green-dim:#00A020;
-    --green-light:#E6FAE9; --green-mid:rgba(0,200,41,0.12);
-    --red:#FF0000; --red-dim:#CC0000; --red-mid:rgba(255,0,0,0.08);
+    --green:#00C829; --green-dim:#00A020; --green-mid:rgba(0,200,41,0.12);
+    --red:#FF0000; --red-mid:rgba(255,0,0,0.08);
     --gold:#C6BC5C; --gold-mid:rgba(198,188,92,0.15);
-    --white:#FFFFFF; --off-white:#F8F8F6;
+    --black:#111111; --white:#FFFFFF;
     --gray-50:#F4F4F2; --gray-100:#EBEBEB; --gray-200:#D4D4D4;
-    --gray-400:#999999; --gray-600:#555555; --text:#1A1A1A;
-    --radius:10px; --radius-lg:18px;
-    --shadow-sm:0 2px 12px rgba(0,0,0,0.07);
+    --gray-400:#999999; --gray-600:#555555;
     --shadow:0 4px 24px rgba(0,0,0,0.10);
-    --shadow-lg:0 8px 40px rgba(0,0,0,0.14);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
-  body { font-family:'DM Sans',sans-serif; background:var(--white); color:var(--text); line-height:1.65; overflow-x:hidden; }
+  body { font-family:'DM Sans',sans-serif; background:var(--white); color:var(--black); line-height:1.65; overflow-x:hidden; }
   h1,h2,h3,h4 { font-family:'Bebas Neue',sans-serif; letter-spacing:0.04em; line-height:1.1; }
 
-  /* NAV */
   nav {
     position:sticky; top:0; z-index:100;
     background:rgba(255,255,255,0.97); backdrop-filter:blur(12px);
     border-bottom:3px solid var(--green); height:72px;
     display:flex; align-items:center; justify-content:space-between;
-    padding:0 5%; box-shadow:var(--shadow-sm);
+    padding:0 5%; box-shadow:0 2px 12px rgba(0,0,0,0.07);
   }
   .nav-logo { display:flex; align-items:center; text-decoration:none; }
   .nav-links { display:flex; gap:22px; list-style:none; align-items:center; }
   .nav-links a { color:var(--gray-600); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; transition:color 0.2s; }
   .nav-links a:hover { color:var(--green); }
-  .nav-cta { background:var(--green) !important; color:var(--white) !important; padding:10px 20px; border-radius:8px; font-weight:700 !important; transition:background 0.2s !important; }
-  .nav-cta:hover { background:var(--green-dim) !important; }
+  .nav-cta { background:var(--green) !important; color:var(--white) !important; padding:10px 20px; border-radius:8px; font-weight:700 !important; }
   .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; z-index:200; }
   .hamburger span { display:block; width:24px; height:2px; background:var(--black); border-radius:2px; transition:transform 0.3s, opacity 0.3s; }
   .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity:0; }
   .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
-  /* PAGE HERO */
-  .page-hero {
-    background:var(--black); padding:64px 5% 52px; text-align:center;
-  }
-  .page-hero .label {
-    display:inline-block; font-size:11px; font-weight:700;
-    letter-spacing:0.14em; text-transform:uppercase; color:var(--green);
-    margin-bottom:14px; padding:4px 14px; background:var(--green-mid); border-radius:100px;
-  }
-  .page-hero h1 { font-size:clamp(36px,5vw,64px); color:var(--white); margin-bottom:12px; }
-  .page-hero p { font-size:16px; color:rgba(255,255,255,0.5); font-weight:300; max-width:520px; margin:0 auto; }
+  .page-hero { background:var(--black); padding:80px 5% 60px; text-align:center; }
+  .page-hero .label { display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--green); margin-bottom:14px; padding:4px 14px; background:var(--green-mid); border-radius:100px; }
+  .page-hero h1 { font-size:clamp(40px,6vw,72px); color:var(--white); margin-bottom:14px; }
+  .page-hero p { font-size:17px; color:rgba(255,255,255,0.55); font-weight:300; max-width:560px; margin:0 auto; }
 
-  /* ── BOOKING / FORM SECTION ── */
-  .booking-section {
-    background:var(--black); padding:80px 5%; position:relative; overflow:hidden;
-  }
-  .booking-section::before {
-    content:''; position:absolute; inset:0;
-    background:radial-gradient(ellipse at top left, rgba(0,200,41,0.06) 0%, transparent 60%);
-    pointer-events:none;
-  }
-  .booking-inner { max-width:1200px; margin:0 auto; position:relative; z-index:2; }
-  .booking-grid {
-    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;
-  }
+  .section { padding:80px 5%; }
+  .section-alt { background:var(--gray-50); }
+  .section-inner { max-width:1100px; margin:0 auto; }
 
-  .booking-left h2 {
-    font-size:clamp(32px,4vw,52px); color:var(--white); margin-bottom:14px;
-  }
-  .booking-left h2 span { color:var(--green); }
-  .booking-left p {
-    font-size:15px; color:rgba(255,255,255,0.5);
-    font-weight:300; line-height:1.75; margin-bottom:28px;
-  }
-
-  .contact-info { display:flex; flex-direction:column; gap:14px; margin-bottom:32px; }
-  .contact-item {
-    display:flex; align-items:center; gap:14px;
-    color:rgba(255,255,255,0.7); font-size:15px;
-  }
-  .contact-icon {
-    width:42px; height:42px; border-radius:10px; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    font-size:18px;
-  }
-  .ci-green { background:var(--green-mid); color:var(--green); }
-  .ci-red   { background:var(--red-mid);   color:var(--red); }
-  .ci-gold  { background:var(--gold-mid);  color:var(--gold); }
-
-  .contact-item a { color:rgba(255,255,255,0.7); text-decoration:none; transition:color 0.2s; }
-  .contact-item a:hover { color:var(--green); }
-
-  .availability-badge {
-    display:inline-flex; align-items:center; gap:8px;
-    background:rgba(0,200,41,0.12); border:1px solid rgba(0,200,41,0.3);
-    border-radius:100px; padding:10px 18px;
-    font-size:13px; font-weight:600; color:var(--green);
-  }
-  .pulse {
-    width:10px; height:10px; border-radius:50%; background:var(--green);
-    animation:pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity:1; transform:scale(1); box-shadow:0 0 0 0 rgba(0,200,41,0.4); }
-    50% { opacity:0.8; transform:scale(1.1); box-shadow:0 0 0 6px rgba(0,200,41,0); }
-  }
-
-  /* ── SERVICE REQUEST FORM ── */
-  .form-card {
-    background:var(--white); border-radius:var(--radius-lg);
-    padding:36px 32px; box-shadow:var(--shadow-lg);
-  }
-  .form-card h3 {
-    font-size:24px; color:var(--black); margin-bottom:6px;
-  }
-  .form-card .form-sub {
-    font-size:13px; color:var(--gray-400); margin-bottom:24px; font-family:'DM Sans',sans-serif;
-  }
-
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  .form-row.single { grid-template-columns:1fr; }
-
-  .field { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
-  .field label {
-    font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--gray-600);
-  }
-  .field input,
-  .field select,
-  .field textarea {
-    padding:12px 14px;
-    border:1.5px solid var(--gray-200);
-    border-radius:9px;
-    font-size:14px; font-family:'DM Sans',sans-serif;
-    color:var(--text); background:var(--white);
-    outline:none; transition:border-color 0.2s, box-shadow 0.2s;
-    appearance:none;
-    resize:none;
-  }
-  .field input:focus,
-  .field select:focus,
-  .field textarea:focus {
-    border-color:var(--green);
-    box-shadow:0 0 0 3px rgba(0,200,41,0.1);
-  }
-  .field input::placeholder,
-  .field textarea::placeholder { color:var(--gray-400); }
-
-  .form-submit {
-    width:100%; padding:15px;
-    background:var(--green); color:var(--white);
-    border:none; border-radius:9px;
-    font-size:15px; font-weight:700;
-    font-family:'DM Sans',sans-serif;
-    letter-spacing:0.06em; text-transform:uppercase;
-    cursor:pointer;
-    transition:background 0.2s, transform 0.15s, box-shadow 0.2s;
-    box-shadow:0 4px 16px rgba(0,200,41,0.25);
-    margin-top:4px;
-  }
-  .form-submit:hover { background:var(--green-dim); transform:translateY(-1px); box-shadow:0 6px 22px rgba(0,200,41,0.35); }
-
-  .form-note {
-    text-align:center; font-size:12px; color:var(--gray-400); margin-top:12px;
-  }
-  .form-note a { color:var(--green); text-decoration:none; }
-
-  /* Success / Error states */
-  .form-status {
-    display:none; padding:14px 18px; border-radius:9px;
-    font-size:14px; font-weight:500; margin-top:14px; text-align:center;
-  }
-  .form-status.success { background:var(--green-mid); color:var(--green-dim); border:1px solid rgba(0,200,41,0.3); display:block; }
-  .form-status.error   { background:var(--red-mid);   color:var(--red-dim);   border:1px solid rgba(255,0,0,0.2);  display:block; }
-
-  
-  /* ── APPLIANCE LOOKUP ── */
-  .appliance-lookup {
-    background:var(--gray-50);
-    border:2px solid var(--gray-100);
-    border-radius:var(--radius-lg);
-    padding:20px 22px;
-    margin-bottom:14px;
-    display:none;
-  }
-  .appliance-lookup.active { display:block; }
-  .appliance-lookup-title {
-    font-size:12px; font-weight:700;
-    letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--green-dim); margin-bottom:14px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .appliance-lookup-title::before {
-    content:'';
-    display:inline-block; width:3px; height:14px;
-    background:var(--green); border-radius:2px;
-  }
-
-  .appliance-search-wrap {
-    position:relative; margin-bottom:14px;
-  }
-  .appliance-search-wrap input {
-    padding:11px 14px 11px 38px;
-    border:1.5px solid var(--gray-200);
-    border-radius:9px; width:100%;
-    font-size:14px; font-family:'DM Sans',sans-serif;
-    color:var(--text); background:var(--white);
-    outline:none; transition:border-color 0.2s, box-shadow 0.2s;
-  }
-  .appliance-search-wrap input:focus {
-    border-color:var(--green);
-    box-shadow:0 0 0 3px rgba(0,200,41,0.1);
-  }
-  .appliance-search-wrap .search-icon {
-    position:absolute; left:12px; top:50%; transform:translateY(-50%);
-    font-size:15px; color:var(--gray-400); pointer-events:none;
-  }
-
-  .appliance-dropdown {
-    position:absolute; top:calc(100% + 4px); left:0; right:0; z-index:50;
-    background:var(--white);
-    border:1.5px solid var(--gray-200);
-    border-radius:10px;
-    box-shadow:var(--shadow);
-    max-height:220px; overflow-y:auto;
-    display:none;
-  }
-  .appliance-dropdown.open { display:block; }
-  .appliance-dropdown-item {
-    padding:10px 14px; font-size:14px; cursor:pointer;
+  /* Steps */
+  .steps { display:flex; flex-direction:column; gap:0; margin-top:56px; }
+  .step-row {
+    display:grid; grid-template-columns:80px 1fr; gap:40px;
+    align-items:start; padding:48px 0;
     border-bottom:1px solid var(--gray-100);
-    transition:background 0.15s;
-    display:flex; align-items:center; gap:10px;
+    position:relative;
   }
-  .appliance-dropdown-item:last-child { border-bottom:none; }
-  .appliance-dropdown-item:hover { background:var(--green-light); }
-  .appliance-dropdown-item .item-icon { font-size:18px; }
-  .appliance-dropdown-item .item-name { font-weight:500; }
-  .appliance-dropdown-item .item-cat { font-size:11px; color:var(--gray-400); margin-left:auto; }
-  .appliance-dropdown-empty {
-    padding:14px; font-size:13px; color:var(--gray-400); text-align:center;
+  .step-row:last-child { border-bottom:none; }
+  .step-num {
+    font-family:'Bebas Neue',sans-serif; font-size:80px; line-height:1;
+    letter-spacing:0.02em; flex-shrink:0; text-align:center;
   }
+  .step-row:nth-child(1) .step-num { color:var(--green); }
+  .step-row:nth-child(2) .step-num { color:var(--gold); }
+  .step-row:nth-child(3) .step-num { color:var(--red); }
+  .step-row:nth-child(4) .step-num { color:var(--green); }
+  .step-content h3 { font-size:32px; color:var(--black); margin-bottom:12px; }
+  .step-content p { font-size:15px; color:var(--gray-600); font-weight:300; line-height:1.75; max-width:640px; margin-bottom:16px; }
+  .step-detail {
+    display:flex; gap:12px; flex-wrap:wrap; margin-top:16px;
+  }
+  .step-pill {
+    font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    padding:6px 14px; border-radius:100px;
+  }
+  .sp-g { background:var(--green-mid); color:var(--green-dim); border:1px solid rgba(0,200,41,0.2); }
+  .sp-o { background:var(--gold-mid);  color:#7a7420;          border:1px solid rgba(198,188,92,0.25); }
+  .sp-r { background:var(--red-mid);   color:var(--red);       border:1px solid rgba(255,0,0,0.2); }
 
-  .appliance-selected-tag {
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--green-mid); border:1px solid rgba(0,200,41,0.3);
-    border-radius:100px; padding:6px 14px;
-    font-size:13px; font-weight:600; color:var(--green-dim);
-    margin-bottom:14px;
+  /* Guarantee strip */
+  .guarantee-strip {
+    background:var(--black); border-radius:18px; padding:56px 48px;
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+    margin-top:60px;
   }
-  .appliance-selected-tag .clear-tag {
-    cursor:pointer; font-size:16px; color:var(--green-dim);
-    line-height:1; transition:color 0.15s;
-  }
-  .appliance-selected-tag .clear-tag:hover { color:var(--red); }
+  .g-visual { text-align:center; }
+  .g-num { font-family:'Bebas Neue',sans-serif; font-size:100px; line-height:1; background:linear-gradient(135deg,var(--green) 0%,var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .g-label { font-size:24px; color:var(--white); }
+  .g-content h2 { font-size:clamp(28px,3.5vw,44px); color:var(--white); margin-bottom:14px; }
+  .g-content p { font-size:15px; color:rgba(255,255,255,0.5); font-weight:300; line-height:1.75; }
 
-  .appliance-fields {
-    display:grid; grid-template-columns:1fr 1fr; gap:12px;
-  }
-  .appliance-fields .field { margin-bottom:0; }
-  .appliance-fields .field label {
-    font-size:11px; font-weight:700;
-    letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-600);
-    display:block; margin-bottom:6px;
-  }
-  .appliance-fields .field input,
-  .appliance-fields .field select {
-    width:100%; padding:11px 13px;
-    border:1.5px solid var(--gray-200); border-radius:9px;
-    font-size:13px; font-family:'DM Sans',sans-serif;
-    color:var(--text); background:var(--white);
-    outline:none; appearance:none;
-    transition:border-color 0.2s, box-shadow 0.2s;
-  }
-  .appliance-fields .field input:focus,
-  .appliance-fields .field select:focus {
-    border-color:var(--green);
-    box-shadow:0 0 0 3px rgba(0,200,41,0.1);
-  }
+  /* FAQ */
+  .faq-list { display:flex; flex-direction:column; gap:16px; margin-top:48px; }
+  .faq-item { background:var(--white); border:2px solid var(--gray-100); border-radius:12px; overflow:hidden; transition:border-color 0.2s; }
+  .faq-item:hover { border-color:var(--green); }
+  .faq-q { padding:20px 24px; font-size:16px; font-weight:600; color:var(--black); cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+  .faq-q::after { content:'+'; font-size:22px; font-weight:300; color:var(--green); transition:transform 0.2s; flex-shrink:0; margin-left:16px; }
+  .faq-item.open .faq-q::after { transform:rotate(45deg); }
+  .faq-a { display:none; padding:0 24px 20px; font-size:14px; color:var(--gray-600); font-weight:300; line-height:1.75; }
+  .faq-item.open .faq-a { display:block; }
 
-  @media(max-width:600px) {
-    .appliance-fields { grid-template-columns:1fr; }
-  }
+  .cta-bar { background:var(--green); border-radius:18px; padding:48px 40px; text-align:center; margin-top:60px; }
+  .cta-bar h2 { font-size:clamp(28px,4vw,48px); color:var(--white); margin-bottom:10px; }
+  .cta-bar p { font-size:16px; color:rgba(255,255,255,0.8); margin-bottom:28px; font-weight:300; }
+  .cta-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .btn-dark { background:var(--black); color:var(--green); padding:16px 36px; border-radius:10px; font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:0.06em; text-decoration:none; transition:background 0.2s; }
+  .btn-dark:hover { background:#1a1a1a; }
+  .btn-outline-w { background:transparent; color:var(--white); border:2px solid rgba(255,255,255,0.4); padding:15px 32px; border-radius:10px; font-size:15px; font-weight:600; text-decoration:none; transition:border-color 0.2s; display:inline-block; }
+  .btn-outline-w:hover { border-color:var(--white); }
 
-  
-
-  /* Override booking section to remove top padding (hero handles it) */
-  .booking-section { padding-top:64px; }
-
-  /* TRUST ROW */
-  .trust-row {
-    display:flex; align-items:center; justify-content:center;
-    gap:32px; flex-wrap:wrap;
-    background:var(--green); padding:14px 5%;
-  }
-  .trust-item { display:flex; align-items:center; gap:8px; color:var(--white); font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
-
-  /* PULSE */
-  .pulse { width:10px; height:10px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; }
-  @keyframes pulse {
-    0%,100% { opacity:1; transform:scale(1); box-shadow:0 0 0 0 rgba(0,200,41,0.4); }
-    50%      { opacity:0.8; transform:scale(1.1); box-shadow:0 0 0 6px rgba(0,200,41,0); }
-  }
-
-  footer {
-    background:var(--gray-50); padding:32px 5%;
-    border-top:3px solid var(--green);
-    display:flex; align-items:center; justify-content:space-between;
-    flex-wrap:wrap; gap:16px; font-size:13px; color:var(--gray-400);
-  }
+  footer { background:var(--gray-50); padding:32px 5%; border-top:3px solid var(--green); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; font-size:13px; color:var(--gray-400); }
   footer a { color:var(--green); text-decoration:none; }
 
   @media(max-width:960px) {
@@ -324,9 +119,13 @@
     .nav-links a { display:block; padding:14px 5%; border-bottom:1px solid var(--gray-100); font-size:14px; }
     .nav-links li:last-child a { border-bottom:none; }
     .nav-cta { margin:12px 5% 4px !important; display:block !important; text-align:center !important; border-radius:9px !important; }
-    .booking-grid { grid-template-columns:1fr; }
-    .form-row { grid-template-columns:1fr; }
-    .appliance-fields { grid-template-columns:1fr; }
+    .step-row { grid-template-columns:60px 1fr; gap:20px; }
+    .step-num { font-size:56px; }
+    .guarantee-strip { grid-template-columns:1fr; gap:32px; padding:40px 24px; }
+  }
+  @media(max-width:480px) {
+    .step-row { grid-template-columns:1fr; }
+    .step-num { font-size:48px; }
   }
 </style>
 </head>
@@ -351,229 +150,122 @@
 </nav>
 
 <div class="page-hero">
-  <div class="label">Schedule Service</div>
-  <h1>Request a Service Visit</h1>
-  <p>Fill out the form below and we will confirm your appointment within 1 hour. Same-day availability for urgent needs.</p>
+  <div class="label">The Process</div>
+  <h1>Effortless From<br>Start to Finish</h1>
+  <p>No waiting on hold, no vague estimates, no surprises on your invoice. Here is exactly what happens when you book with us.</p>
 </div>
 
-<div class="trust-row">
-  <div class="trust-item">✓ Licensed &amp; Insured</div>
-  <div class="trust-item">✓ Same-Day Available</div>
-  <div class="trust-item">✓ Upfront Pricing</div>
-  <div class="trust-item">✓ 90-Day Guarantee</div>
-  <div class="trust-item">✓ 24/7 Emergency Line</div>
-</div>
+<section class="section">
+  <div class="section-inner">
+    <div class="steps">
 
-<!-- BOOKING / CONTACT FORM SECTION -->
-<section class="booking-section" id="book">
-  <div class="booking-inner">
-    <div class="booking-grid">
-
-      <div class="booking-left reveal">
-        <div class="section-label" style="background:rgba(0,200,41,0.15);">Request Service</div>
-        <h2>Schedule Your <span>Service Today</span></h2>
-        <p>Fill out the form and our team will confirm your appointment within 1 hour. For immediate assistance, call or text us directly.</p>
-
-        <div class="contact-info">
-          <div class="contact-item">
-            <div class="contact-icon ci-green">☎</div>
-            <div><strong style="color:var(--white);">Call or Text</strong><br><a href="tel:2124706979">(212) 470-6979</a></div>
+      <div class="step-row">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Book Online in Minutes</h3>
+          <p>Fill out our simple service request form, pick a date and time that works for your schedule, and enter your address. We show real-time availability — no hold music, no callback queues. Need help the same day? We have same-day slots available for urgent requests.</p>
+          <div class="step-detail">
+            <span class="step-pill sp-g">Online booking 24/7</span>
+            <span class="step-pill sp-g">Same-day slots available</span>
+            <span class="step-pill sp-g">1-hour confirmation</span>
           </div>
-          <div class="contact-item">
-            <div class="contact-icon ci-gold">✉</div>
-            <div><strong style="color:var(--white);">Email Us</strong><br><a href="mailto:admin@iandiempireappliance.com">admin@iandiempireappliance.com</a></div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon ci-red">⏰</div>
-            <div><strong style="color:var(--white);">Hours</strong><br>Mon–Sat 8am–8pm · Emergency 24/7</div>
-          </div>
-        </div>
-
-        <div class="availability-badge">
-          <div class="pulse"></div>
-          Techs available today in your area
         </div>
       </div>
 
-      <div class="reveal rv2">
-        <div class="form-card" id="serviceForm">
-          <h3>Service Request</h3>
-          <p class="form-sub">We'll confirm within 1 hour &amp; send details to your email.</p>
-
-          <form id="bookingForm" name="service-request" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
-            <!-- Netlify hidden fields -->
-            <input type="hidden" name="form-name" value="service-request">
-            <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
-
-            <div class="form-row">
-              <div class="field">
-                <label>First Name *</label>
-                <input type="text" name="firstName" placeholder="John" required>
-              </div>
-              <div class="field">
-                <label>Last Name *</label>
-                <input type="text" name="lastName" placeholder="Smith" required>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="field">
-                <label>Email Address *</label>
-                <input type="email" name="email" placeholder="john@example.com" required>
-              </div>
-              <div class="field">
-                <label>Phone Number *</label>
-                <input type="tel" name="phone" placeholder="(212) 555-0100" required>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="field">
-                <label>Service Type *</label>
-                <select name="serviceType" id="serviceTypeSelect" required>
-                  <option value="">Select a service...</option>
-                  <option value="Appliance Repair">Appliance Repair</option>
-                  <option value="Appliance Installation">Appliance Installation</option>
-                  <option value="HVAC / AC Repair">HVAC / AC Repair</option>
-                  <option value="HVAC Installation">HVAC Installation</option>
-                  <option value="Plumbing Repair">Plumbing Repair</option>
-                  <option value="Plumbing Installation">Plumbing Installation</option>
-                  <option value="Emergency Service">Emergency Service</option>
-                  <option value="General Inspection">General Inspection</option>
-                </select>
-              </div>
-              <div class="field">
-                <label>Preferred Date *</label>
-                <input type="date" name="preferredDate" id="prefDate" required>
-              </div>
-            </div>
-
-            <!-- APPLIANCE LOOKUP — shown when Appliance service selected -->
-            <div class="appliance-lookup" id="applianceLookup">
-              <div class="appliance-lookup-title">Appliance Details</div>
-
-              <!-- Appliance Type Search -->
-              <div class="appliance-search-wrap" id="applianceSearchWrap">
-                <span class="search-icon">🔍</span>
-                <input
-                  type="text"
-                  id="applianceSearchInput"
-                  placeholder="Search appliance type — e.g. Refrigerator, Washer, AC..."
-                  autocomplete="off"
-                >
-                <div class="appliance-dropdown" id="applianceDropdown"></div>
-              </div>
-              <div id="applianceSelectedTag" style="display:none;">
-                <div class="appliance-selected-tag">
-                  <span id="applianceTagText"></span>
-                  <span class="clear-tag" id="clearAppliance" title="Clear">✕</span>
-                </div>
-              </div>
-              <input type="hidden" name="applianceType" id="applianceTypeHidden">
-
-              <!-- Brand / Make / Model fields -->
-              <div class="appliance-fields">
-                <div class="field">
-                  <label>Brand / Manufacturer</label>
-                  <select name="applianceBrand" id="applianceBrand">
-                    <option value="">Select brand...</option>
-                    <option>Whirlpool</option>
-                    <option>GE / GE Profile</option>
-                    <option>Samsung</option>
-                    <option>LG</option>
-                    <option>Maytag</option>
-                    <option>Frigidaire</option>
-                    <option>KitchenAid</option>
-                    <option>Bosch</option>
-                    <option>Electrolux</option>
-                    <option>Amana</option>
-                    <option>Kenmore</option>
-                    <option>Speed Queen</option>
-                    <option>Miele</option>
-                    <option>Sub-Zero</option>
-                    <option>Viking</option>
-                    <option>Thermador</option>
-                    <option>Wolf</option>
-                    <option>Fisher &amp; Paykel</option>
-                    <option>Haier</option>
-                    <option>Hisense</option>
-                    <option>Midea</option>
-                    <option>Carrier</option>
-                    <option>Trane</option>
-                    <option>Lennox</option>
-                    <option>Rheem</option>
-                    <option>York</option>
-                    <option>Bryant</option>
-                    <option>Goodman</option>
-                    <option>Daikin</option>
-                    <option>Mitsubishi Electric</option>
-                    <option>Other / Unknown</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label>Model Number</label>
-                  <input type="text" name="applianceModel" placeholder="e.g. WRF535SWHZ or unknown">
-                </div>
-                <div class="field">
-                  <label>Serial Number</label>
-                  <input type="text" name="applianceSerial" placeholder="e.g. HR4521683 or unknown">
-                </div>
-                <div class="field">
-                  <label>Approx. Age of Unit</label>
-                  <select name="applianceAge">
-                    <option value="">Select...</option>
-                    <option>Less than 1 year</option>
-                    <option>1–3 years</option>
-                    <option>3–5 years</option>
-                    <option>5–10 years</option>
-                    <option>10–15 years</option>
-                    <option>15+ years</option>
-                    <option>Unknown</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="field">
-                <label>Preferred Time</label>
-                <select name="preferredTime">
-                  <option value="">Any time</option>
-                  <option>Morning (8am – 12pm)</option>
-                  <option>Afternoon (12pm – 4pm)</option>
-                  <option>Evening (4pm – 8pm)</option>
-                </select>
-              </div>
-              <div class="field">
-                <label>Zip Code *</label>
-                <input type="text" name="zipCode" placeholder="10001" maxlength="10" required>
-              </div>
-            </div>
-
-            <div class="field form-row single">
-              <label>Address</label>
-              <input type="text" name="address" placeholder="123 Main St, New York, NY">
-            </div>
-
-            <div class="field form-row single">
-              <label>Describe the Issue *</label>
-              <textarea name="message" rows="3" placeholder="Please describe what's happening — e.g. 'Refrigerator not cooling, making loud noise since yesterday...'" required></textarea>
-            </div>
-
-            <button type="submit" class="form-submit" id="submitBtn">
-              Send Service Request →
-            </button>
-
-            <div class="form-note">
-              By submitting you agree to be contacted about your request.<br>
-              Prefer to call? <a href="tel:2124706979">(212) 470-6979</a> · Available 24/7 for emergencies.
-            </div>
-
-            <div id="formStatus" class="form-status"></div>
-          </form>
+      <div class="step-row">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>We Confirm &amp; Assign Your Tech</h3>
+          <p>Within one hour of your request, our team confirms your appointment and assigns you a technician. You will receive their name, photo, certifications, and a live ETA before they ever knock on your door — so you always know who to expect.</p>
+          <div class="step-detail">
+            <span class="step-pill sp-o">Tech name &amp; photo sent</span>
+            <span class="step-pill sp-o">Live ETA tracking</span>
+            <span class="step-pill sp-o">Licensed &amp; background-checked</span>
+          </div>
         </div>
       </div>
 
+      <div class="step-row">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Upfront Diagnosis &amp; Quote</h3>
+          <p>Your technician arrives on time, diagnoses the issue thoroughly, and explains everything in plain language before any work begins. You receive a flat-rate quote locked in writing. There are no hidden fees, no surprise line items, and no pressure — you decide whether to proceed.</p>
+          <div class="step-detail">
+            <span class="step-pill sp-r">Flat-rate pricing</span>
+            <span class="step-pill sp-r">No hidden charges</span>
+            <span class="step-pill sp-r">Your approval required</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Problem Solved. Guaranteed.</h3>
+          <p>We fix it right the first time using OEM-grade or manufacturer-approved parts. You pay only when the job is complete and you are satisfied. Every repair is backed by our 90-day workmanship guarantee — if anything fails within 90 days, we return at zero cost to you, no debate needed.</p>
+          <div class="step-detail">
+            <span class="step-pill sp-g">Pay only when satisfied</span>
+            <span class="step-pill sp-g">OEM-grade parts</span>
+            <span class="step-pill sp-g">90-day guarantee</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="guarantee-strip">
+      <div class="g-visual">
+        <div class="g-num">90</div>
+        <div class="g-label">Day Guarantee</div>
+      </div>
+      <div class="g-content">
+        <h2>We Stand Behind Every Job</h2>
+        <p>If any repair we perform fails within 90 days — for any reason — we return and fix it at zero cost. No fine print, no back-and-forth, no charge. That is not a policy — it is the foundation of how we do business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:520px;margin:0 auto 0;">
+      <div style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:12px;padding:4px 14px;background:var(--green-mid);border-radius:100px;">FAQ</div>
+      <h2 style="font-size:clamp(28px,4vw,48px);color:var(--black);margin-bottom:14px;">Common Questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">How quickly can you come out?</div>
+        <div class="faq-a">We offer same-day service for most appliance, HVAC, and plumbing requests. Submit your booking before noon and we can typically have a technician at your door the same day. Emergency 24/7 service is also available by phone.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">Do I pay anything upfront?</div>
+        <div class="faq-a">No. You only pay after the work is complete and you are fully satisfied. We provide a flat-rate quote before starting — what we quote is what you pay, with no additions.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">What brands and appliances do you service?</div>
+        <div class="faq-a">We service all major brands including Whirlpool, GE, Samsung, LG, Maytag, Bosch, KitchenAid, Frigidaire, Sub-Zero, and many more. Our technicians are trained on refrigerators, washers, dryers, dishwashers, ovens, ranges, HVAC systems, water heaters, and all standard plumbing fixtures.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">What areas do you serve?</div>
+        <div class="faq-a">We serve all five NYC boroughs — Manhattan, Brooklyn, Queens, the Bronx, and Staten Island — plus Nassau County and Suffolk County on Long Island. Not sure if we cover your area? Give us a call and we will confirm.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">Are your technicians licensed and insured?</div>
+        <div class="faq-a">Yes. Every technician we send to your home is licensed, fully insured, and background-checked. You will receive their name and photo before the visit so you always know who to expect.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">What is the 90-day guarantee?</div>
+        <div class="faq-a">If any repair we perform fails within 90 days of the service date — for any reason — we will return to your home and fix the issue at absolutely no charge. No paperwork, no debate. HomeShield members get a 180-day guarantee and Elite members get 365 days.</div>
+      </div>
+    </div>
+
+    <div class="cta-bar">
+      <h2>Ready to Book?</h2>
+      <p>Schedule online in minutes or call us — we are available 24/7 for emergencies.</p>
+      <div class="cta-actions">
+        <a href="book.html" class="btn-dark">Book a Service →</a>
+        <a href="tel:2124706979" class="btn-outline-w">☎ (212) 470-6979</a>
+      </div>
     </div>
   </div>
 </section>
@@ -584,7 +276,6 @@
 </footer>
 
 <script>
-  // Mobile menu
   function toggleMenu() {
     document.getElementById('navLinks').classList.toggle('open');
     document.getElementById('hamburger').classList.toggle('open');
@@ -593,187 +284,9 @@
     document.getElementById('navLinks').classList.remove('open');
     document.getElementById('hamburger').classList.remove('open');
   }
-
-
-  // Mobile menu
-  function toggleMenu() {
-    const nav = document.getElementById('navLinks');
-    const btn = document.getElementById('hamburger');
-    nav.classList.toggle('open');
-    btn.classList.toggle('open');
+  function toggleFAQ(el) {
+    el.parentElement.classList.toggle('open');
   }
-  function closeMenu() {
-    document.getElementById('navLinks').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-  }
-
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => obs.observe(el));
-
-  // Set min date
-  const dp = document.getElementById('prefDate');
-  if(dp) { dp.min = new Date().toISOString().split('T')[0]; dp.value = dp.min; }
-
-  // Form submission via EmailJS (free tier — sends to admin@iandiempireappliance.com)
-    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn    = document.getElementById('submitBtn');
-    const status = 
-
-  // ── APPLIANCE DATA ──
-  const APPLIANCES = [
-    // Kitchen
-    { name: 'Refrigerator',          icon: '🧊', cat: 'Kitchen' },
-    { name: 'French Door Refrigerator', icon: '🧊', cat: 'Kitchen' },
-    { name: 'Side-by-Side Refrigerator', icon: '🧊', cat: 'Kitchen' },
-    { name: 'Mini Fridge / Compact Refrigerator', icon: '🧊', cat: 'Kitchen' },
-    { name: 'Wine Cooler / Beverage Fridge', icon: '🍷', cat: 'Kitchen' },
-    { name: 'Freezer (Chest)',        icon: '❄️', cat: 'Kitchen' },
-    { name: 'Freezer (Upright)',      icon: '❄️', cat: 'Kitchen' },
-    { name: 'Dishwasher',             icon: '🍽️', cat: 'Kitchen' },
-    { name: 'Oven / Range (Gas)',     icon: '🔥', cat: 'Kitchen' },
-    { name: 'Oven / Range (Electric)', icon: '⚡', cat: 'Kitchen' },
-    { name: 'Oven / Range (Dual Fuel)', icon: '🔥', cat: 'Kitchen' },
-    { name: 'Wall Oven',              icon: '🔲', cat: 'Kitchen' },
-    { name: 'Microwave (Countertop)', icon: '📡', cat: 'Kitchen' },
-    { name: 'Microwave (Over-Range)', icon: '📡', cat: 'Kitchen' },
-    { name: 'Cooktop (Gas)',          icon: '🔥', cat: 'Kitchen' },
-    { name: 'Cooktop (Electric)',     icon: '⚡', cat: 'Kitchen' },
-    { name: 'Cooktop (Induction)',    icon: '⚡', cat: 'Kitchen' },
-    { name: 'Range Hood / Vent',      icon: '💨', cat: 'Kitchen' },
-    { name: 'Garbage Disposal',       icon: '🗑️', cat: 'Kitchen' },
-    { name: 'Ice Maker',              icon: '🧊', cat: 'Kitchen' },
-    { name: 'Trash Compactor',        icon: '🗑️', cat: 'Kitchen' },
-    // Laundry
-    { name: 'Washing Machine (Top Load)', icon: '🫧', cat: 'Laundry' },
-    { name: 'Washing Machine (Front Load)', icon: '🫧', cat: 'Laundry' },
-    { name: 'Dryer (Gas)',            icon: '🌀', cat: 'Laundry' },
-    { name: 'Dryer (Electric)',       icon: '🌀', cat: 'Laundry' },
-    { name: 'Washer/Dryer Combo',     icon: '🫧', cat: 'Laundry' },
-    { name: 'Stackable Washer/Dryer', icon: '🫧', cat: 'Laundry' },
-    // HVAC & Climate
-    { name: 'Central Air Conditioner', icon: '❄️', cat: 'HVAC' },
-    { name: 'Window AC Unit',         icon: '🪟', cat: 'HVAC' },
-    { name: 'Mini-Split / Ductless AC', icon: '❄️', cat: 'HVAC' },
-    { name: 'Portable AC',            icon: '❄️', cat: 'HVAC' },
-    { name: 'Furnace (Gas)',          icon: '🔥', cat: 'HVAC' },
-    { name: 'Furnace (Electric)',     icon: '⚡', cat: 'HVAC' },
-    { name: 'Heat Pump',              icon: '♨️', cat: 'HVAC' },
-    { name: 'Boiler',                 icon: '♨️', cat: 'HVAC' },
-    { name: 'Thermostat / Smart Thermostat', icon: '🌡️', cat: 'HVAC' },
-    { name: 'Humidifier (Whole Home)', icon: '💧', cat: 'HVAC' },
-    { name: 'Dehumidifier',           icon: '💧', cat: 'HVAC' },
-    { name: 'Air Purifier',           icon: '💨', cat: 'HVAC' },
-    // Water
-    { name: 'Water Heater (Tank)',    icon: '🚿', cat: 'Water' },
-    { name: 'Water Heater (Tankless)', icon: '🚿', cat: 'Water' },
-    { name: 'Water Softener',         icon: '💧', cat: 'Water' },
-    { name: 'Water Filtration System', icon: '💧', cat: 'Water' },
-    { name: 'Sump Pump',              icon: '💧', cat: 'Water' },
-    // Other
-    { name: 'Dryer Vent / Duct Cleaning', icon: '🌀', cat: 'Other' },
-    { name: 'Other / Not Listed',     icon: '🔧', cat: 'Other' },
-  ];
-
-  // ── APPLIANCE LOOKUP LOGIC ──
-  const serviceTypeSelect  = document.getElementById('serviceTypeSelect');
-  const applianceLookup    = document.getElementById('applianceLookup');
-  const searchInput        = document.getElementById('applianceSearchInput');
-  const dropdown           = document.getElementById('applianceDropdown');
-  const selectedTag        = document.getElementById('applianceSelectedTag');
-  const tagText            = document.getElementById('applianceTagText');
-  const clearBtn           = document.getElementById('clearAppliance');
-  const hiddenInput        = document.getElementById('applianceTypeHidden');
-  const searchWrap         = document.getElementById('applianceSearchWrap');
-
-  function isApplianceService(val) {
-    return val === 'Appliance Repair' || val === 'Appliance Installation';
-  }
-
-  serviceTypeSelect.addEventListener('change', function() {
-    if (isApplianceService(this.value)) {
-      applianceLookup.classList.add('active');
-    } else {
-      applianceLookup.classList.remove('active');
-      clearApplianceSelection();
-    }
-  });
-
-  function renderDropdown(items) {
-    dropdown.innerHTML = '';
-    if (items.length === 0) {
-      dropdown.innerHTML = '<div class="appliance-dropdown-empty">No matches found — try a different term</div>';
-    } else {
-      items.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'appliance-dropdown-item';
-        div.innerHTML = '<span class="item-icon">' + item.icon + '</span>' +
-          '<span class="item-name">' + item.name + '</span>' +
-          '<span class="item-cat">' + item.cat + '</span>';
-        div.addEventListener('mousedown', function(e) {
-          e.preventDefault();
-          selectAppliance(item);
-        });
-        dropdown.appendChild(div);
-      });
-    }
-    dropdown.classList.add('open');
-  }
-
-  function selectAppliance(item) {
-    hiddenInput.value = item.name;
-    tagText.textContent = item.icon + '  ' + item.name;
-    selectedTag.style.display = 'block';
-    searchWrap.style.display = 'none';
-    dropdown.classList.remove('open');
-    searchInput.value = '';
-  }
-
-  function clearApplianceSelection() {
-    hiddenInput.value = '';
-    selectedTag.style.display = 'none';
-    searchWrap.style.display = 'block';
-    searchInput.value = '';
-    dropdown.classList.remove('open');
-  }
-
-  clearBtn.addEventListener('click', clearApplianceSelection);
-
-  searchInput.addEventListener('input', function() {
-    const q = this.value.trim().toLowerCase();
-    if (q.length < 1) { dropdown.classList.remove('open'); return; }
-    const filtered = APPLIANCES.filter(a =>
-      a.name.toLowerCase().includes(q) || a.cat.toLowerCase().includes(q)
-    );
-    renderDropdown(filtered);
-  });
-
-  searchInput.addEventListener('focus', function() {
-    if (this.value.trim().length >= 1) {
-      const q = this.value.trim().toLowerCase();
-      const filtered = APPLIANCES.filter(a =>
-        a.name.toLowerCase().includes(q) || a.cat.toLowerCase().includes(q)
-      );
-      renderDropdown(filtered);
-    } else {
-      renderDropdown(APPLIANCES);
-    }
-  });
-
-  document.addEventListener('click', function(e) {
-    if (!searchWrap.contains(e.target)) {
-      dropdown.classList.remove('open');
-    }
-  });
-
-  // Add appliance info to the email submission
-  const origSubmit = document.getElementById('bookingForm').onsubmit;
-
-
 </script>
 </body>
 </html>

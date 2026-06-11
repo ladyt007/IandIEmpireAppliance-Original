@@ -1,4 +1,4 @@
-# Netlify configuration for I And I Empire Appliance
+# Netlify configuration for I And I Empire
 
 [build]
   publish = "."   # root folder — all your HTML files are here
